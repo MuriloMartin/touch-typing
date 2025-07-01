@@ -1,0 +1,70 @@
+<html>
+    <head>
+    </head>
+    <body class="layout">
+            <div class="mainTextWrapper">
+                 <p id="prefix"></p>
+                 <p id="targetLetter" class="targetLetter"></p>
+                 <p id="sufix"></p>
+        </div>
+    </body>
+    <script>
+        let text = "teste1 teste2 teste3 teste4 teste5"
+        let current_word_index = 0
+        let prefix = document.getElementById("prefix")
+        let target = document.getElementById("targetLetter")
+        let sufix = document.getElementById("sufix")
+        let elements = [prefix, target, sufix]
+        let parts = getTextParts(current_word_index,text)
+        updateText(parts,elements)
+
+        document.addEventListener("keydown", (key)=>{
+            let letter = key.key   
+            expected_letter = text[current_word_index]
+            if (letter == expected_letter){
+                current_word_index+=1
+                parts = getTextParts(current_word_index,text)
+                updateText(parts, elements)
+                elements[1].className="targetLetter"
+
+                return
+            }
+            elements[1].className="targetLetter incorrectLetters"
+        })
+
+        function getTextParts(index, text){
+            let prefix = text.substring(0,index)
+            let target = text[index]
+            let sufix = text.substring(index+1,text.length-1)
+            return [prefix, target, sufix]
+        }
+
+        function updateText(parts, elementsRefs){
+            console.log('asdfasdfasdfasd')
+            for(let i=0;i<=parts.length-1;i++){
+                elementsRefs[i].innerHTML = parts[i]
+            }
+        }
+    </script>
+    <style>
+        .layout {
+            background-color: darkgray;
+            font-size: 44px;
+        }
+        .mainTextWrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .targetLetter{
+            text-decoration: underline;
+        }
+        .correctLetters{
+        }
+        .incorrectLetters{
+            color: red
+        }
+
+    </style>
+</html>
