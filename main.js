@@ -17,10 +17,14 @@ let target = document.getElementById("targetLetter")
 let sufix = document.getElementById("sufix")
 let elements = [prefix, target, sufix]
 
+let left_letters = "qazwsxedcrfvtgb"
+let rigth_letters = "yhnujmikolp<>,.;"
+
 let text = common_programming_words[page].join(" ")
 let parts = getTextParts(current_word_index,text)
 updateText(parts,elements)
 
+let mode = 1 //0, 1 ou 2 
 document.addEventListener("keydown", (key)=>{
     let letter = key.key   
     expected_letter = text[current_word_index]
